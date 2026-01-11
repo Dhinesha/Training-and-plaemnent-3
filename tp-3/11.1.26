@@ -1,0 +1,93 @@
+import java.util.*;
+
+class OnlineVotingSystem {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static HashMap<String, Boolean> voters = new HashMap<>();
+    static HashMap<String, Integer> candidates = new HashMap<>();
+
+    public static void main(String[] args) {
+
+        // Initialize voters
+        voters.put("V101", false);
+        voters.put("V102", false);
+        voters.put("V103", false);
+        voters.put("V104", false);
+
+        // Initialize candidates
+        candidates.put("Candidate A", 0);
+        candidates.put("Candidate B", 0);
+        candidates.put("Candidate C", 0);
+
+        while (true) {
+            System.out.println("\n--- ONLINE VOTING SYSTEM ---");
+            System.out.println("1. Voter Login");
+            System.out.println("2. View Results (Admin)");
+            System.out.println("3. Exit");
+            System.out.print("Choose option: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    voterLogin();
+                    break;
+                case 2:
+                    viewResults();
+                    break;
+                case 3:
+                    System.out.println("Thank you for using Online Voting System");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    static void voterLogin() {
+        System.out.print("Enter Voter ID: ");
+        String voterId = sc.next();
+
+        if (!voters.containsKey(voterId)) {
+            System.out.println("Invalid Voter ID!");
+            return;
+        }
+
+        if (voters.get(voterId)) {
+            System.out.println("You have already voted!");
+            return;
+        }
+
+        System.out.println("\nCandidates:");
+        int i = 1;
+        ArrayList<String> names = new ArrayList<>();
+
+        for (String name : candidates.keySet()) {
+            System.out.println(i + ". " + name);
+            names.add(name);
+            i++;
+        }
+
+        System.out.print("Cast your vote (Enter number): ");
+        int vote = sc.nextInt();
+
+        if (vote < 1 || vote > names.size()) {
+            System.out.println("Invalid vote!");
+            return;
+        }
+
+        String selectedCandidate = names.get(vote - 1);
+        candidates.put(selectedCandidate, candidates.get(selectedCandidate) + 1);
+        voters.put(voterId, true);
+
+        System.out.println("Vote cast successfully!");
+    }
+
+    static void viewResults() {
+        System.out.println("\n--- VOTING RESULTS ---");
+        for (Map.Entry<String, Integer> entry : candidates.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue() + " votes");
+        }
+    }
+}
