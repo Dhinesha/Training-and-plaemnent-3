@@ -1,0 +1,26 @@
+class Library {
+    String bookName;
+    boolean issued = false;
+
+    void issueBook() {
+        if (!issued) {
+            issued = true;
+            System.out.println("Book Issued");
+        } else {
+            System.out.println("Book already issued");
+        }
+    }
+
+    void returnBook() {
+        issued = false;
+        System.out.println("Book Returned");
+    }
+}
+
+public class LibrarySystem {
+    public static void main(String[] args) {
+        Library l = new Library();
+        l.issueBook();
+        l.returnBook();
+    }
+}
