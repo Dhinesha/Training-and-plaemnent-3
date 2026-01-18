@@ -1,0 +1,17 @@
+class Voting {
+    static int countA = 0, countB = 0;
+
+    static void vote(char c) {
+        if (c == 'A') countA++;
+        else if (c == 'B') countB++;
+    }
+
+    public static void main(String[] args) {
+        vote('A');
+        vote('B');
+        vote('A');
+
+        System.out.println("Candidate A: " + countA);
+        System.out.println("Candidate B: " + countB);
+    }
+}
