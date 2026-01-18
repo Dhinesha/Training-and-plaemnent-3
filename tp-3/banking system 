@@ -1,0 +1,30 @@
+class Bank {
+    int balance = 5000;
+
+    void deposit(int amt) {
+        balance += amt;
+        System.out.println("Deposited: " + amt);
+    }
+
+    void withdraw(int amt) {
+        if (amt <= balance) {
+            balance -= amt;
+            System.out.println("Withdrawn: " + amt);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+
+    void display() {
+        System.out.println("Balance: " + balance);
+    }
+}
+
+public class BankSystem {
+    public static void main(String[] args) {
+        Bank b = new Bank();
+        b.deposit(2000);
+        b.withdraw(1000);
+        b.display();
+    }
+}
